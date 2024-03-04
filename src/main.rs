@@ -1,6 +1,7 @@
-mod logic;
-mod persistence;
-mod view;
+mod logica;
+mod persistencia;
+mod vista;
+mod schema;
 
 fn main() {
 
