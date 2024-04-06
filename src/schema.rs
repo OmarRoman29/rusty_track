@@ -1,97 +1,101 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    consulta (idConsulta) {
-        idConsulta -> Unsigned<Integer>,
-        fecha -> Nullable<Date>,
-        peso -> Nullable<Float>,
-        altura -> Nullable<Float>,
-        presionS -> Nullable<Float>,
-        presionD -> Nullable<Float>,
+    Cita (idCita) {
+        idCita -> Unsigned<Integer>,
+        fecha -> Date,
+        #[max_length = 45]
+        sintomas -> Varchar,
+        presionD -> Nullable<Integer>,
+        presionS -> Nullable<Integer>,
         temperatura -> Nullable<Float>,
-        sintomas -> Nullable<Text>,
-        idPaciente -> Unsigned<Integer>,
-        idDoctor -> Unsigned<Integer>,
+        peso -> Nullable<Float>,
+        idEmp -> Unsigned<Integer>,
+        idPac -> Unsigned<Integer>,
     }
 }
 
 diesel::table! {
-    doctor (idDoctor) {
-        idDoctor -> Unsigned<Integer>,
-        #[max_length = 45]
+    Empleado (idEmp) {
+        idEmp -> Unsigned<Integer>,
+        #[max_length = 20]
         nombre -> Varchar,
-        #[max_length = 45]
+        #[max_length = 20]
         apellidoP -> Varchar,
-        #[max_length = 45]
+        #[max_length = 20]
         apellidoM -> Varchar,
-        fechaIngreso -> Date,
-        fechaN -> Date,
+        fNacimiento -> Date,
+        fIngreso -> Date,
         #[max_length = 10]
-        sexo -> Nullable<Varchar>,
+        categoria -> Varchar,
         sueldo -> Decimal,
     }
 }
 
 diesel::table! {
-    farmaco (idMedicamento) {
-        idMedicamento -> Unsigned<Integer>,
-        #[max_length = 50]
-        nombreComercial -> Varchar,
-        #[max_length = 50]
-        subtancia -> Varchar,
-        unidadesInventario -> Nullable<Unsigned<Integer>>,
-    }
-}
-
-diesel::table! {
-    lote (idLote) {
-        idLote -> Unsigned<Integer>,
-        #[max_length = 50]
-        marca -> Nullable<Varchar>,
-        #[max_length = 30]
-        laboratio -> Nullable<Varchar>,
-        #[max_length = 30]
-        presentacion -> Varchar,
-        gramaje -> Float,
-        #[max_length = 15]
-        unidades -> Nullable<Varchar>,
-        cantidadCaja -> Integer,
-        costo -> Decimal,
-        caducidad -> Date,
-        cajasPorLote -> Unsigned<Integer>,
-        idMedicamento -> Nullable<Unsigned<Integer>>,
-    }
-}
-
-diesel::table! {
-    paciente (idPaciente) {
-        idPaciente -> Unsigned<Integer>,
-        #[max_length = 45]
+    Medicamento (idMe) {
+        idMe -> Unsigned<Integer>,
+        #[max_length = 25]
         nombre -> Varchar,
         #[max_length = 45]
-        apellidoP -> Varchar,
-        #[max_length = 45]
-        apellidoM -> Varchar,
-        #[max_length = 10]
-        sexo -> Varchar,
-        fechaNac -> Date,
-        #[max_length = 15]
-        curp -> Varchar,
-        #[max_length = 45]
-        tipoS -> Varchar,
-        alergias -> Nullable<Text>,
-        enfermedadesCronicas -> Nullable<Text>,
+        nombreC -> Varchar,
     }
 }
 
-diesel::joinable!(consulta -> doctor (idDoctor));
-diesel::joinable!(consulta -> paciente (idPaciente));
-diesel::joinable!(lote -> farmaco (idMedicamento));
+diesel::table! {
+    Paciente (idPac) {
+        idPac -> Unsigned<Integer>,
+        #[max_length = 15]
+        nombre -> Varchar,
+        #[max_length = 15]
+        apellidoP -> Varchar,
+        #[max_length = 15]
+        apellidoM -> Varchar,
+        fNacimiento -> Date,
+        #[max_length = 25]
+        correo -> Nullable<Varchar>,
+        #[max_length = 25]
+        telefono -> Nullable<Varchar>,
+        #[max_length = 50]
+        enfermCro -> Nullable<Varchar>,
+    }
+}
+
+diesel::table! {
+    Presentacion (idPres) {
+        idPres -> Unsigned<Integer>,
+        #[max_length = 25]
+        nombre -> Varchar,
+        #[max_length = 10]
+        unidades -> Varchar,
+    }
+}
+
+diesel::table! {
+    Producto (idPro) {
+        idPro -> Unsigned<Integer>,
+        #[max_length = 25]
+        nombre -> Varchar,
+        #[max_length = 25]
+        laboratorio -> Varchar,
+        cantidad -> Float,
+        unidadesC -> Nullable<Integer>,
+        disponibilidad -> Integer,
+        idPres -> Unsigned<Integer>,
+        idMe -> Unsigned<Integer>,
+    }
+}
+
+diesel::joinable!(Cita -> Empleado (idEmp));
+diesel::joinable!(Cita -> Paciente (idPac));
+diesel::joinable!(Producto -> Medicamento (idMe));
+diesel::joinable!(Producto -> Presentacion (idPres));
 
 diesel::allow_tables_to_appear_in_same_query!(
-    consulta,
-    doctor,
-    farmaco,
-    lote,
-    paciente,
+    Cita,
+    Empleado,
+    Medicamento,
+    Paciente,
+    Presentacion,
+    Producto,
 );

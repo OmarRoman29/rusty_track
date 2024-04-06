@@ -1,12 +1,15 @@
 [package]
-name = "rustytrack"
+name = "rusty_track"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-gtk = "0.18.0"
+gtk = "0.18.1"
+glib = "0.19.3"
+gio = "0.19.3"
 diesel = { version = "2.1.0", features = ["mysql"] }
-chrono = { version = "0.4.34", features = ["serde"] }  # "serde" es opcional, úsalo si necesitas serialización/deserialización
+# "serde" es opcional, úsalo si necesitas serialización/deserialización
+chrono = { version = "0.4.34", features = ["serde"] }  
 dotenvy = "0.15"
