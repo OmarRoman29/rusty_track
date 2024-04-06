@@ -9,7 +9,7 @@ CREATE TABLE Empleado(
     fNacimiento DATE NOT NULL,
     fIngreso DATE NOT NULL,
     categoria VARCHAR(10) NOT NULL,
-    sueldo DECIMAL NOT NULL
+    sueldo FLOAT NOT NULL
 );
 
 DROP TABLE IF EXISTS Medicamento;
