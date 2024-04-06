@@ -1,0 +1,1 @@
+pub empleado_repository;

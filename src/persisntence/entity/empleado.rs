@@ -1,4 +1,3 @@
-use bigdecimal::BigDecimal;
 use chrono::NaiveDate;
 use diesel::prelude::*;
 
@@ -13,5 +12,5 @@ pub struct Empleado{
     pub fNacimiento: NaiveDate,
     pub fIngreso: NaiveDate,
     pub categoria: String,
-    pub sueldo: BigDecimal,
+    pub sueldo: f32
 }

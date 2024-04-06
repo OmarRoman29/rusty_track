@@ -1,6 +1,7 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
+    #[allow(non_snake_case)]
     Cita (idCita) {
         idCita -> Unsigned<Integer>,
         fecha -> Date,
@@ -16,6 +17,7 @@ diesel::table! {
 }
 
 diesel::table! {
+    #[allow(non_snake_case)]
     Empleado (idEmp) {
         idEmp -> Unsigned<Integer>,
         #[max_length = 20]
@@ -28,11 +30,12 @@ diesel::table! {
         fIngreso -> Date,
         #[max_length = 10]
         categoria -> Varchar,
-        sueldo -> Decimal,
+        sueldo -> Float,
     }
 }
 
 diesel::table! {
+    #[allow(non_snake_case)]
     Medicamento (idMe) {
         idMe -> Unsigned<Integer>,
         #[max_length = 25]
@@ -43,6 +46,7 @@ diesel::table! {
 }
 
 diesel::table! {
+    #[allow(non_snake_case)]
     Paciente (idPac) {
         idPac -> Unsigned<Integer>,
         #[max_length = 15]
@@ -62,6 +66,7 @@ diesel::table! {
 }
 
 diesel::table! {
+    #[allow(non_snake_case)]
     Presentacion (idPres) {
         idPres -> Unsigned<Integer>,
         #[max_length = 25]
@@ -72,6 +77,7 @@ diesel::table! {
 }
 
 diesel::table! {
+    #[allow(non_snake_case)]
     Producto (idPro) {
         idPro -> Unsigned<Integer>,
         #[max_length = 25]
