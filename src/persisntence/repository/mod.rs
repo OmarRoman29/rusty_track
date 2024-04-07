@@ -1,1 +1,1 @@
-pub empleado_repository;
+pub mod empleado_repository;
